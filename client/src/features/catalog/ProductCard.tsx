@@ -9,6 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Product } from "../../app/models/product";
+import { Link } from "react-router-dom";
 
 interface Props {
   product: Product;
@@ -19,7 +20,7 @@ export default function ProductCard({ product }: Props) {
     <Card>
       <CardHeader
         avatar={
-          <Avatar sx={{ bgcolor: "secondary.main" }}>
+          <Avatar sx={{ bgcolor: "secondary.light" }}>
             {product.name.charAt(0).toUpperCase()}
           </Avatar>
         }
@@ -32,7 +33,7 @@ export default function ProductCard({ product }: Props) {
         sx={{
           height: 140,
           backgroundSize: "contain",
-          bgcolor: "primary.light",
+          bgcolor: "grey.A200",
         }}
         image={product.pictureUrl}
         title={product.name}
@@ -46,8 +47,17 @@ export default function ProductCard({ product }: Props) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Add to Cart</Button>
-        <Button size="small">View</Button>
+        <Button color="inherit" size="small">
+          Add to Cart
+        </Button>
+        <Button
+          component={Link}
+          to={`/catalog/${product.id}`}
+          color="inherit"
+          size="small"
+        >
+          View
+        </Button>
       </CardActions>
     </Card>
   );
