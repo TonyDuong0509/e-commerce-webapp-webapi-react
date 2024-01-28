@@ -22,15 +22,15 @@ import {
 import { fetchProductAsync, productSelectors } from "./catalogSlice";
 
 function ProductDetails() {
-  const { basket, status } = useAppSelector((state) => state.basket);
-  const dispatch = useAppDispatch();
   const { id } = useParams<{ id: string }>();
+  const dispatch = useAppDispatch();
+  const { basket, status } = useAppSelector((state) => state.basket);
   const product = useAppSelector((state) =>
-    productSelectors.selectById(state, id!)
+    productSelectors.selectById(state, parseInt(id!))
   );
   const { status: productStatus } = useAppSelector((state) => state.catalog);
   const [quantity, setQuantity] = useState(0);
-  const item = basket?.items.find((x) => x.productId === product?.id);
+  const item = basket?.items.find((i) => i.productId === product?.id);
 
   useEffect(() => {
     if (item) setQuantity(item.quantity);
